@@ -5,9 +5,9 @@ package v1alpha1
 type DevWorkspaceTemplateSpec struct {
 	// Parent workspace template
 	// +optional
-	Parent *Parent `json:"parent,omitempty"`
+	Parent *Parent `json:"parent,omitempty" yaml:"parent,omitempty"`
 
-	DevWorkspaceTemplateSpecContent `json:",inline"`
+	DevWorkspaceTemplateSpecContent `json:",inline" yaml:",inline"`
 }
 
 type DevWorkspaceTemplateSpecContent struct {

@@ -33,12 +33,12 @@ type ComponentPluginOverride struct {
 	// devfile that may reference this component through a parent or a plugin.
 	// +kubebuilder:validation:Pattern=^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
 	// +kubebuilder:validation:MaxLength=63
-	Name string `json:"name"`
+	Name string `json:"name" yaml:"name"`
 
 	// Map of implementation-dependant free-form YAML attributes.
 	// +optional
-	Attributes                   attributes.Attributes `json:"attributes,omitempty"`
-	ComponentUnionPluginOverride `json:",inline"`
+	Attributes                   attributes.Attributes `json:"attributes,omitempty" yaml:"attributes,omitempty"`
+	ComponentUnionPluginOverride `json:",inline" yaml:",inline"`
 }
 
 type CommandPluginOverride struct {
@@ -48,12 +48,12 @@ type CommandPluginOverride struct {
 	// a parent, or in events.
 	// +kubebuilder:validation:Pattern=^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
 	// +kubebuilder:validation:MaxLength=63
-	Id string `json:"id"`
+	Id string `json:"id" yaml:"id"`
 
 	// Map of implementation-dependant free-form YAML attributes.
 	// +optional
-	Attributes                 attributes.Attributes `json:"attributes,omitempty"`
-	CommandUnionPluginOverride `json:",inline"`
+	Attributes                 attributes.Attributes `json:"attributes,omitempty" yaml:"attributes,omitempty"`
+	CommandUnionPluginOverride `json:",inline" yaml:",inline"`
 }
 
 // +union
@@ -64,30 +64,30 @@ type ComponentUnionPluginOverride struct {
 	//
 	// +unionDiscriminator
 	// +optional
-	ComponentType ComponentTypePluginOverride `json:"componentType,omitempty"`
+	ComponentType ComponentTypePluginOverride `json:"componentType,omitempty" yaml:"componentType,omitempty"`
 
 	// Allows adding and configuring devworkspace-related containers
 	// +optional
-	Container *ContainerComponentPluginOverride `json:"container,omitempty"`
+	Container *ContainerComponentPluginOverride `json:"container,omitempty" yaml:"container,omitempty"`
 
 	// Allows importing into the devworkspace the Kubernetes resources
 	// defined in a given manifest. For example this allows reusing the Kubernetes
 	// definitions used to deploy some runtime components in production.
 	//
 	// +optional
-	Kubernetes *KubernetesComponentPluginOverride `json:"kubernetes,omitempty"`
+	Kubernetes *KubernetesComponentPluginOverride `json:"kubernetes,omitempty" yaml:"kubernetes,omitempty"`
 
 	// Allows importing into the devworkspace the OpenShift resources
 	// defined in a given manifest. For example this allows reusing the OpenShift
 	// definitions used to deploy some runtime components in production.
 	//
 	// +optional
-	Openshift *OpenshiftComponentPluginOverride `json:"openshift,omitempty"`
+	Openshift *OpenshiftComponentPluginOverride `json:"openshift,omitempty" yaml:"openshift,omitempty"`
 
 	// Allows specifying the definition of a volume
 	// shared by several other components
 	// +optional
-	Volume *VolumeComponentPluginOverride `json:"volume,omitempty"`
+	Volume *VolumeComponentPluginOverride `json:"volume,omitempty" yaml:"volume,omitempty"`
 }
 
 // +union
@@ -97,11 +97,11 @@ type CommandUnionPluginOverride struct {
 	// Type of devworkspace command
 	// +unionDiscriminator
 	// +optional
-	CommandType CommandTypePluginOverride `json:"commandType,omitempty"`
+	CommandType CommandTypePluginOverride `json:"commandType,omitempty" yaml:"commandType,omitempty"`
 
 	// CLI Command executed in an existing component container
 	// +optional
-	Exec *ExecCommandPluginOverride `json:"exec,omitempty"`
+	Exec *ExecCommandPluginOverride `json:"exec,omitempty" yaml:"exec,omitempty"`
 
 	// Command that consists in applying a given component definition,
 	// typically bound to a devworkspace event.
@@ -115,12 +115,12 @@ type CommandUnionPluginOverride struct {
 	// it is assumed the component will be applied at devworkspace start
 	// by default.
 	// +optional
-	Apply *ApplyCommandPluginOverride `json:"apply,omitempty"`
+	Apply *ApplyCommandPluginOverride `json:"apply,omitempty" yaml:"apply,omitempty"`
 
 	// Composite command that allows executing several sub-commands
 	// either sequentially or concurrently
 	// +optional
-	Composite *CompositeCommandPluginOverride `json:"composite,omitempty"`
+	Composite *CompositeCommandPluginOverride `json:"composite,omitempty" yaml:"composite,omitempty"`
 }
 
 // ComponentType describes the type of component.
@@ -129,25 +129,25 @@ type ComponentTypePluginOverride string
 
 // Component that allows the developer to add a configured container into their devworkspace
 type ContainerComponentPluginOverride struct {
-	BaseComponentPluginOverride `json:",inline"`
-	ContainerPluginOverride     `json:",inline"`
-	Endpoints                   []EndpointPluginOverride `json:"endpoints,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
+	BaseComponentPluginOverride `json:",inline" yaml:",inline"`
+	ContainerPluginOverride     `json:",inline" yaml:",inline"`
+	Endpoints                   []EndpointPluginOverride `json:"endpoints,omitempty" yaml:"endpoints,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
 }
 
 // Component that allows partly importing Kubernetes resources into the devworkspace POD
 type KubernetesComponentPluginOverride struct {
-	K8sLikeComponentPluginOverride `json:",inline"`
+	K8sLikeComponentPluginOverride `json:",inline" yaml:",inline"`
 }
 
 // Component that allows partly importing Openshift resources into the devworkspace POD
 type OpenshiftComponentPluginOverride struct {
-	K8sLikeComponentPluginOverride `json:",inline"`
+	K8sLikeComponentPluginOverride `json:",inline" yaml:",inline"`
 }
 
 // Component that allows the developer to declare and configure a volume into their devworkspace
 type VolumeComponentPluginOverride struct {
-	BaseComponentPluginOverride `json:",inline"`
-	VolumePluginOverride        `json:",inline"`
+	BaseComponentPluginOverride `json:",inline" yaml:",inline"`
+	VolumePluginOverride        `json:",inline" yaml:",inline"`
 }
 
 // CommandType describes the type of command.
@@ -155,7 +155,7 @@ type VolumeComponentPluginOverride struct {
 type CommandTypePluginOverride string
 
 type ExecCommandPluginOverride struct {
-	LabeledCommandPluginOverride `json:",inline"`
+	LabeledCommandPluginOverride `json:",inline" yaml:",inline"`
 
 	//  +optional
 	// The actual command-line string
@@ -165,12 +165,12 @@ type ExecCommandPluginOverride struct {
 	//  - `$PROJECTS_ROOT`: A path where projects sources are mounted as defined by container component's sourceMapping.
 	//
 	//  - `$PROJECT_SOURCE`: A path to a project source ($PROJECTS_ROOT/<project-name>). If there are multiple projects, this will point to the directory of the first one.
-	CommandLine string `json:"commandLine,omitempty"`
+	CommandLine string `json:"commandLine,omitempty" yaml:"commandLine,omitempty"`
 
 	//  +optional
 	// Describes component to which given action relates
 	//
-	Component string `json:"component,omitempty"`
+	Component string `json:"component,omitempty" yaml:"component,omitempty"`
 
 	// Working directory where the command should be executed
 	//
@@ -180,41 +180,41 @@ type ExecCommandPluginOverride struct {
 	//
 	//  - `$PROJECT_SOURCE`: A path to a project source ($PROJECTS_ROOT/<project-name>). If there are multiple projects, this will point to the directory of the first one.
 	// +optional
-	WorkingDir string `json:"workingDir,omitempty"`
+	WorkingDir string `json:"workingDir,omitempty" yaml:"workingDir,omitempty"`
 
 	// +optional
 	// +patchMergeKey=name
 	// +patchStrategy=merge
 	// Optional list of environment variables that have to be set
 	// before running the command
-	Env []EnvVarPluginOverride `json:"env,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
+	Env []EnvVarPluginOverride `json:"env,omitempty" yaml:"env,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
 
 	// +optional
 	// Whether the command is capable to reload itself when source code changes.
 	// If set to `true` the command won't be restarted and it is expected to handle file changes on its own.
 	//
 	// Default value is `false`
-	HotReloadCapable bool `json:"hotReloadCapable,omitempty"`
+	HotReloadCapable bool `json:"hotReloadCapable,omitempty" yaml:"hotReloadCapable,omitempty"`
 }
 
 type ApplyCommandPluginOverride struct {
-	LabeledCommandPluginOverride `json:",inline"`
+	LabeledCommandPluginOverride `json:",inline" yaml:",inline"`
 
 	//  +optional
 	// Describes component that will be applied
 	//
-	Component string `json:"component,omitempty"`
+	Component string `json:"component,omitempty" yaml:"component,omitempty"`
 }
 
 type CompositeCommandPluginOverride struct {
-	LabeledCommandPluginOverride `json:",inline"`
+	LabeledCommandPluginOverride `json:",inline" yaml:",inline"`
 
 	// The commands that comprise this composite command
-	Commands []string `json:"commands,omitempty" patchStrategy:"replace"`
+	Commands []string `json:"commands,omitempty" yaml:"commands,omitempty" patchStrategy:"replace"`
 
 	// Indicates if the sub-commands should be executed concurrently
 	// +optional
-	Parallel bool `json:"parallel,omitempty"`
+	Parallel bool `json:"parallel,omitempty" yaml:"parallel,omitempty"`
 }
 
 // DevWorkspace component: Anything that will bring additional features / tooling / behaviour / context
@@ -224,7 +224,7 @@ type BaseComponentPluginOverride struct {
 
 type ContainerPluginOverride struct {
 	//  +optional
-	Image string `json:"image,omitempty"`
+	Image string `json:"image,omitempty" yaml:"image,omitempty"`
 
 	// +optional
 	// +patchMergeKey=name
@@ -236,14 +236,14 @@ type ContainerPluginOverride struct {
 	//  - `$PROJECTS_ROOT`
 	//
 	//  - `$PROJECT_SOURCE`
-	Env []EnvVarPluginOverride `json:"env,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
+	Env []EnvVarPluginOverride `json:"env,omitempty" yaml:"env,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
 
 	// +optional
 	// List of volumes mounts that should be mounted is this container.
-	VolumeMounts []VolumeMountPluginOverride `json:"volumeMounts,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
+	VolumeMounts []VolumeMountPluginOverride `json:"volumeMounts,omitempty" yaml:"volumeMounts,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
 
 	// +optional
-	MemoryLimit string `json:"memoryLimit,omitempty"`
+	MemoryLimit string `json:"memoryLimit,omitempty" yaml:"memoryLimit,omitempty"`
 
 	// +optional
 	MemoryRequest string `json:"memoryRequest,omitempty"`
@@ -258,43 +258,43 @@ type ContainerPluginOverride struct {
 	//
 	// Defaults to an empty array, meaning use whatever is defined in the image.
 	// +optional
-	Command []string `json:"command,omitempty" patchStrategy:"replace"`
+	Command []string `json:"command,omitempty" yaml:"command,omitempty" patchStrategy:"replace"`
 
 	// The arguments to supply to the command running the dockerimage component. The arguments are supplied either to the default command provided in the image or to the overridden command.
 	//
 	// Defaults to an empty array, meaning use whatever is defined in the image.
 	// +optional
-	Args []string `json:"args,omitempty" patchStrategy:"replace"`
+	Args []string `json:"args,omitempty" yaml:"args,omitempty" patchStrategy:"replace"`
 
 	// Toggles whether or not the project source code should
 	// be mounted in the component.
 	//
 	// Defaults to true for all component types except plugins and components that set `dedicatedPod` to true.
 	// +optional
-	MountSources *bool `json:"mountSources,omitempty"`
+	MountSources *bool `json:"mountSources,omitempty" yaml:"mountSources,omitempty"`
 
 	// Optional specification of the path in the container where
 	// project sources should be transferred/mounted when `mountSources` is `true`.
 	// When omitted, the default value of /projects is used.
 	// +optional
-	SourceMapping string `json:"sourceMapping,omitempty"`
+	SourceMapping string `json:"sourceMapping,omitempty" yaml:"sourceMapping,omitempty"`
 
 	// Specify if a container should run in its own separated pod,
 	// instead of running as part of the main development environment pod.
 	//
 	// Default value is `false`
 	// +optional
-	DedicatedPod bool `json:"dedicatedPod,omitempty"`
+	DedicatedPod bool `json:"dedicatedPod,omitempty" yaml:"dedicatedPod,omitempty"`
 }
 
 type EndpointPluginOverride struct {
 
 	// +kubebuilder:validation:Pattern=^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
 	// +kubebuilder:validation:MaxLength=63
-	Name string `json:"name"`
+	Name string `json:"name" yaml:"name"`
 
 	//  +optional
-	TargetPort int `json:"targetPort,omitempty"`
+	TargetPort int `json:"targetPort,omitempty" yaml:"targetPort,omitempty"`
 
 	// Describes how the endpoint should be exposed on the network.
 	//
@@ -310,7 +310,7 @@ type EndpointPluginOverride struct {
 	//
 	// Default value is `public`
 	// +optional
-	Exposure EndpointExposurePluginOverride `json:"exposure,omitempty"`
+	Exposure EndpointExposurePluginOverride `json:"exposure,omitempty" yaml:"exposure,omitempty"`
 
 	// Describes the application and transport protocols of the traffic that will go through this endpoint.
 	//
@@ -330,16 +330,16 @@ type EndpointPluginOverride struct {
 	//
 	// Default value is `http`
 	// +optional
-	Protocol EndpointProtocolPluginOverride `json:"protocol,omitempty"`
+	Protocol EndpointProtocolPluginOverride `json:"protocol,omitempty" yaml:"protocol,omitempty"`
 
 	// Describes whether the endpoint should be secured and protected by some
 	// authentication process. This requires a protocol of `https` or `wss`.
 	// +optional
-	Secure bool `json:"secure,omitempty"`
+	Secure bool `json:"secure,omitempty" yaml:"secure,omitempty"`
 
 	// Path of the endpoint URL
 	// +optional
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" yaml:"path,omitempty"`
 
 	// Map of implementation-dependant string-based free-form attributes.
 	//
@@ -349,13 +349,13 @@ type EndpointPluginOverride struct {
 	//
 	// - type: "terminal" / "ide" / "ide-dev",
 	// +optional
-	Attributes attributes.Attributes `json:"attributes,omitempty"`
+	Attributes attributes.Attributes `json:"attributes,omitempty" yaml:"attributes,omitempty"`
 }
 
 type K8sLikeComponentPluginOverride struct {
-	BaseComponentPluginOverride            `json:",inline"`
-	K8sLikeComponentLocationPluginOverride `json:",inline"`
-	Endpoints                              []EndpointPluginOverride `json:"endpoints,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
+	BaseComponentPluginOverride            `json:",inline" yaml:",inline"`
+	K8sLikeComponentLocationPluginOverride `json:",inline" yaml:",inline"`
+	Endpoints                              []EndpointPluginOverride `json:"endpoints,omitempty" yaml:"endpoints,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
 }
 
 // Volume that should be mounted to a component container
@@ -363,27 +363,27 @@ type VolumePluginOverride struct {
 
 	// +optional
 	// Size of the volume
-	Size string `json:"size,omitempty"`
+	Size string `json:"size,omitempty" yaml:"size,omitempty"`
 
 	// +optional
 	// Ephemeral volumes are not stored persistently across restarts. Defaults
 	// to false
-	Ephemeral bool `json:"ephemeral,omitempty"`
+	Ephemeral bool `json:"ephemeral,omitempty" yaml:"ephemeral,omitempty"`
 }
 
 type LabeledCommandPluginOverride struct {
-	BaseCommandPluginOverride `json:",inline"`
+	BaseCommandPluginOverride `json:",inline" yaml:",inline"`
 
 	// +optional
 	// Optional label that provides a label for this command
 	// to be used in Editor UI menus for example
-	Label string `json:"label,omitempty"`
+	Label string `json:"label,omitempty" yaml:"label,omitempty"`
 }
 
 type EnvVarPluginOverride struct {
-	Name string `json:"name" yaml:"name"`
+	Name string `json:"name" yaml:"name" yaml:"name"`
 	//  +optional
-	Value string `json:"value,omitempty" yaml:"value"`
+	Value string `json:"value,omitempty" yaml:"value,omitempty" yaml:"value"`
 }
 
 // Volume that should be mounted to a component container
@@ -394,12 +394,12 @@ type VolumeMountPluginOverride struct {
 	// then they will reuse the same volume and will be able to access to the same files.
 	// +kubebuilder:validation:Pattern=^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
 	// +kubebuilder:validation:MaxLength=63
-	Name string `json:"name"`
+	Name string `json:"name" yaml:"name"`
 
 	// The path in the component container where the volume should be mounted.
 	// If not path is mentioned, default path is the is `/<name>`.
 	// +optional
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" yaml:"path,omitempty"`
 }
 
 // EndpointExposure describes the way an endpoint is exposed on the network.
@@ -420,22 +420,22 @@ type K8sLikeComponentLocationPluginOverride struct {
 	// +
 	// +unionDiscriminator
 	// +optional
-	LocationType K8sLikeComponentLocationTypePluginOverride `json:"locationType,omitempty"`
+	LocationType K8sLikeComponentLocationTypePluginOverride `json:"locationType,omitempty" yaml:"locationType,omitempty"`
 
 	// Location in a file fetched from a uri.
 	// +optional
-	Uri string `json:"uri,omitempty"`
+	Uri string `json:"uri,omitempty" yaml:"uri,omitempty"`
 
 	// Inlined manifest
 	// +optional
-	Inlined string `json:"inlined,omitempty"`
+	Inlined string `json:"inlined,omitempty" yaml:"inlined,omitempty"`
 }
 
 type BaseCommandPluginOverride struct {
 
 	// +optional
 	// Defines the group this command is part of
-	Group *CommandGroupPluginOverride `json:"group,omitempty"`
+	Group *CommandGroupPluginOverride `json:"group,omitempty" yaml:"group,omitempty"`
 }
 
 // K8sLikeComponentLocationType describes the type of
@@ -447,11 +447,11 @@ type CommandGroupPluginOverride struct {
 
 	//  +optional
 	// Kind of group the command is part of
-	Kind CommandGroupKindPluginOverride `json:"kind,omitempty"`
+	Kind CommandGroupKindPluginOverride `json:"kind,omitempty" yaml:"kind,omitempty"`
 
 	// +optional
 	// Identifies the default command for a given group kind
-	IsDefault bool `json:"isDefault,omitempty"`
+	IsDefault bool `json:"isDefault,omitempty" yaml:"isDefault,omitempty"`
 }
 
 // CommandGroupKind describes the kind of command group.

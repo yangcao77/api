@@ -8,7 +8,7 @@ import (
 // +k8s:deepcopy-gen=false
 // +devfile:jsonschema:generate:omitCustomUnionMembers=true,omitPluginUnionMembers=true
 type Devfile struct {
-	devfile.DevfileHeader `json:",inline"`
+	devfile.DevfileHeader `json:",inline" yaml:",inline"`
 
-	DevWorkspaceTemplateSpec `json:",inline"`
+	DevWorkspaceTemplateSpec `json:",inline" yaml:",inline"`
 }
