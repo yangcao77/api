@@ -1,0 +1,171 @@
+createOverride!!!!!!  
+Name: DevWorkspaceTemplateSpecContent
+createOverride!!!!!!  
+Name: Component
+createOverride!!!!!!  
+Name: Project
+createOverride!!!!!!  
+Name: StarterProject
+createOverride!!!!!!  
+Name: Command
+createOverride!!!!!!  
+Name: ComponentUnion
+createOverride!!!!!!  
+Name: ProjectSource
+skipped nextOne: ProjectSourceParentOverride 
+createOverride!!!!!!  
+Name: CommandUnion
+createOverride!!!!!!  
+Name: ComponentType
+createOverride!!!!!!  
+Name: ContainerComponent
+createOverride!!!!!!  
+Name: KubernetesComponent
+createOverride!!!!!!  
+Name: OpenshiftComponent
+createOverride!!!!!!  
+Name: VolumeComponent
+createOverride!!!!!!  
+Name: PluginComponent
+createOverride!!!!!!  
+Name: ProjectSourceType
+createOverride!!!!!!  
+Name: GitProjectSource
+createOverride!!!!!!  
+Name: ZipProjectSource
+createOverride!!!!!!  
+Name: CommandType
+createOverride!!!!!!  
+Name: ExecCommand
+createOverride!!!!!!  
+Name: ApplyCommand
+createOverride!!!!!!  
+Name: CompositeCommand
+createOverride!!!!!!  
+Name: BaseComponent
+createOverride!!!!!!  
+Name: Container
+createOverride!!!!!!  
+Name: Endpoint
+createOverride!!!!!!  
+Name: K8sLikeComponent
+skipped nextOne: K8sLikeComponentParentOverride 
+skipped nextOne: BaseComponentParentOverride 
+createOverride!!!!!!  
+Name: Volume
+skipped nextOne: BaseComponentParentOverride 
+createOverride!!!!!!  
+Name: ImportReference
+createOverride!!!!!!  
+Name: PluginOverrides
+createOverride!!!!!!  
+Name: GitLikeProjectSource
+createOverride!!!!!!  
+Name: CommonProjectSource
+createOverride!!!!!!  
+Name: LabeledCommand
+createOverride!!!!!!  
+Name: EnvVar
+skipped nextOne: LabeledCommandParentOverride 
+skipped nextOne: LabeledCommandParentOverride 
+createOverride!!!!!!  
+Name: EnvVar
+createOverride!!!!!!  
+Name: VolumeMount
+createOverride!!!!!!  
+Name: EndpointExposure
+createOverride!!!!!!  
+Name: EndpointProtocol
+skipped nextOne: BaseComponentParentOverride 
+createOverride!!!!!!  
+Name: K8sLikeComponentLocation
+createOverride!!!!!!  
+Name: Endpoint
+createOverride!!!!!!  
+Name: ImportReferenceUnion
+createOverride!!!!!!  
+Name: OverridesBase
+createOverride!!!!!!  
+Name: ComponentPluginOverride
+createOverride!!!!!!  
+Name: CommandPluginOverride
+skipped nextOne: CommonProjectSourceParentOverride 
+createOverride!!!!!!  
+Name: CheckoutFrom
+createOverride!!!!!!  
+Name: BaseCommand
+createOverride!!!!!!  
+Name: K8sLikeComponentLocationType
+skipped nextOne: EndpointExposureParentOverride 
+skipped nextOne: EndpointProtocolParentOverride 
+createOverride!!!!!!  
+Name: ImportReferenceType
+createOverride!!!!!!  
+Name: KubernetesCustomResourceImportReference
+createOverride!!!!!!  
+Name: ComponentUnionPluginOverride
+createOverride!!!!!!  
+Name: CommandUnionPluginOverride
+createOverride!!!!!!  
+Name: CommandGroup
+createOverride!!!!!!  
+Name: ComponentTypePluginOverride
+createOverride!!!!!!  
+Name: ContainerComponentPluginOverride
+createOverride!!!!!!  
+Name: KubernetesComponentPluginOverride
+createOverride!!!!!!  
+Name: OpenshiftComponentPluginOverride
+createOverride!!!!!!  
+Name: VolumeComponentPluginOverride
+createOverride!!!!!!  
+Name: CommandTypePluginOverride
+createOverride!!!!!!  
+Name: ExecCommandPluginOverride
+createOverride!!!!!!  
+Name: ApplyCommandPluginOverride
+createOverride!!!!!!  
+Name: CompositeCommandPluginOverride
+createOverride!!!!!!  
+Name: CommandGroupKind
+createOverride!!!!!!  
+Name: BaseComponentPluginOverride
+createOverride!!!!!!  
+Name: ContainerPluginOverride
+createOverride!!!!!!  
+Name: EndpointPluginOverride
+createOverride!!!!!!  
+Name: K8sLikeComponentPluginOverride
+skipped nextOne: K8sLikeComponentPluginOverrideParentOverride 
+skipped nextOne: BaseComponentPluginOverrideParentOverride 
+createOverride!!!!!!  
+Name: VolumePluginOverride
+createOverride!!!!!!  
+Name: LabeledCommandPluginOverride
+createOverride!!!!!!  
+Name: EnvVarPluginOverride
+skipped nextOne: LabeledCommandPluginOverrideParentOverride 
+skipped nextOne: LabeledCommandPluginOverrideParentOverride 
+createOverride!!!!!!  
+Name: EnvVarPluginOverride
+createOverride!!!!!!  
+Name: VolumeMountPluginOverride
+createOverride!!!!!!  
+Name: EndpointExposurePluginOverride
+createOverride!!!!!!  
+Name: EndpointProtocolPluginOverride
+skipped nextOne: BaseComponentPluginOverrideParentOverride 
+createOverride!!!!!!  
+Name: K8sLikeComponentLocationPluginOverride
+createOverride!!!!!!  
+Name: EndpointPluginOverride
+createOverride!!!!!!  
+Name: BaseCommandPluginOverride
+createOverride!!!!!!  
+Name: K8sLikeComponentLocationTypePluginOverride
+skipped nextOne: EndpointExposurePluginOverrideParentOverride 
+skipped nextOne: EndpointProtocolPluginOverrideParentOverride 
+createOverride!!!!!!  
+Name: CommandGroupPluginOverride
+createOverride!!!!!!  
+Name: CommandGroupKindPluginOverride

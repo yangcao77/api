@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"go/ast"
+	"os"
 
 	"go/printer"
 	"go/token"
@@ -67,6 +68,7 @@ func (Generator) RegisterMarkers(into *markers.Registry) error {
 // Generate generates the artifacts
 func (g Generator) Generate(ctx *genall.GenerationContext) error {
 	for _, root := range ctx.Roots {
+
 		ctx.Checker.Check(root, func(node ast.Node) bool {
 			// ignore interfaces
 			_, isIface := node.(*ast.InterfaceType)
@@ -159,9 +161,9 @@ func (g Generator) process(root *loader.Package, packageTypes map[string]*marker
 		toProcess = toProcess[1:]
 		if _, isAlreadyProcessed := processed.Get(nextOne.TypeInfo.Name); isAlreadyProcessed &&
 			nextOne.MandatoryKey == "" {
+			log(fmt.Sprintf("skipped nextOne: %v \n", nextOne.OverrideTypeName))
 			continue
 		}
-
 		newOverride, newTypesToOverride, errors := g.createOverride(nextOne, packageTypes)
 		processed.Set(nextOne.TypeInfo.Name, newOverride)
 		for _, err := range errors {
@@ -184,6 +186,7 @@ type fieldChange struct {
 }
 
 func (g Generator) createOverride(newTypeToProcess typeToProcess, packageTypes map[string]*markers.TypeInfo) (ast.Decl, []typeToProcess, []error) {
+	log("createOverride!!!!!!  \n")
 	errors := []error{}
 	var alreadyFoundType *ast.TypeSpec = nil
 	fieldChanges := map[token.Pos]fieldChange{}
@@ -204,6 +207,7 @@ func (g Generator) createOverride(newTypeToProcess typeToProcess, packageTypes m
 			if markerEntry := field.Markers.Get(overridesFieldMarker.Name); markerEntry != nil {
 				overridesMarker = markerEntry.(FieldOverridesInclude)
 			}
+
 			fieldChanges[fieldPos] = fieldChange{
 				fieldInfo:      field,
 				overrideMarker: overridesMarker,
@@ -241,7 +245,31 @@ func (g Generator) createOverride(newTypeToProcess typeToProcess, packageTypes m
 	moreTypesToAdd := []typeToProcess{}
 	overrideGenDecl = astutil.Apply(overrideGenDecl,
 		func(cursor *astutil.Cursor) bool {
+			processFieldType := func(ident *ast.Ident) *typeToProcess {
+				typeToOverride, existsInPackage := packageTypes[ident.Name]
+				if !existsInPackage {
+					return nil
+				}
+				ident.Name = ident.Name + g.suffix
+				return &typeToProcess{
+					OverrideTypeName: ident.Name,
+					TypeInfo:         typeToOverride,
+				}
+			}
+			if valueSpec, isValueSpec := cursor.Node().(*ast.ValueSpec); isValueSpec {
+				log("VALUE SPEC!!!!!!  ")
+				switch fieldType := valueSpec.Type.(type) {
+				case *ast.Ident:
+
+					log(fmt.Sprintf("FIELD NAME %s", fieldType.Name))
+					fieldTypeToProcess := processFieldType(fieldType)
+					if fieldTypeToProcess != nil {
+						moreTypesToAdd = append(moreTypesToAdd, *fieldTypeToProcess)
+					}
+				}
+			}
 			if typeSpec, isTypeSpec := cursor.Node().(*ast.TypeSpec); isTypeSpec {
+				log(fmt.Sprintf("Name: %s\n",typeSpec.Name.Name))
 				if alreadyFoundType != nil {
 					errors = append(errors,
 						fmt.Errorf("types %v and %v are defined in the same type definition - please avoid defining several types in the same type definition",
@@ -314,20 +342,8 @@ func (g Generator) createOverride(newTypeToProcess typeToProcess, packageTypes m
 					` *`+regexp.QuoteMeta("+kubebuilder:default")+` *=.*`,
 				)
 
-				processFieldType := func(ident *ast.Ident) *typeToProcess {
-					typeToOverride, existsInPackage := packageTypes[ident.Name]
-					if !existsInPackage {
-						return nil
-					}
-					ident.Name = ident.Name + g.suffix
-					return &typeToProcess{
-						OverrideTypeName: ident.Name,
-						TypeInfo:         typeToOverride,
-					}
-				}
 
 				var fieldTypeToProcess *typeToProcess
-
 				switch fieldType := astField.Type.(type) {
 				case *ast.ArrayType:
 					switch elementType := fieldType.Elt.(type) {
@@ -409,6 +425,16 @@ func (g Generator) writeOut(ctx *genall.GenerationContext, root *loader.Package,
 	if n < len(outBytes) {
 		root.AddError(io.ErrShortWrite)
 	}
+}
+
+func log( msg string) {
+	fileToWrite := "test_log.txt"
+
+		f, _ := os.OpenFile(fileToWrite, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		defer f.Close()
+		data := []byte(msg)
+		f.Write(data)
+
 }
 
 // updateComments defines, through regexps, which comment lines should be kept and which should be dropped,
