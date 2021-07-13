@@ -65,6 +65,157 @@ func (Generator) RegisterMarkers(into *markers.Registry) error {
 	return genutils.RegisterUnionMarkers(into)
 }
 
+// ValueCallback is a callback called for each raw AST (gendecl, typespec) combo.
+type ValueCallback func(file *ast.File, decl *ast.GenDecl, spec *ast.ValueSpec)
+
+// EachType calls the given callback for each (gendecl, typespec) combo in the
+// given package.  Generally, using markers.EachType is better when working
+// with marker data, and has a more convinient representation.
+func eachValue(pkg *loader.Package, cb ValueCallback) {
+	visitor := &valueVisitor{
+		callback: cb,
+	}
+	pkg.NeedSyntax()
+	for _, file := range pkg.Syntax {
+		visitor.file = file
+		ast.Walk(visitor, file)
+	}
+}
+
+// typeVisitor visits all TypeSpecs, calling the given callback for each.
+type valueVisitor struct {
+	callback ValueCallback
+	decl     *ast.GenDecl
+	file     *ast.File
+}
+
+// Visit visits all TypeSpecs.
+func (v *valueVisitor) Visit(node ast.Node) ast.Visitor {
+	if node == nil {
+		v.decl = nil
+		return v
+	}
+
+	switch valuedNode := node.(type) {
+	case *ast.File:
+		v.file = valuedNode
+		return v
+	case *ast.GenDecl:
+		v.decl = valuedNode
+		return v
+	case *ast.ValueSpec:
+		v.callback(v.file, v.decl, valuedNode)
+		return nil // don't recurse
+	default:
+		return nil
+	}
+}
+
+func extractDoc(node ast.Node, decl *ast.GenDecl) string {
+	var docs *ast.CommentGroup
+	switch docced := node.(type) {
+	case *ast.Field:
+		docs = docced.Doc
+	case *ast.File:
+		docs = docced.Doc
+	case *ast.GenDecl:
+		docs = docced.Doc
+	case *ast.ValueSpec:
+		docs = docced.Doc
+		// type Ident expr expressions get docs attached to the decl,
+		// so check for that case (missing Lparen == single line type decl)
+		if docs == nil && decl.Lparen == token.NoPos {
+			docs = decl.Doc
+		}
+	}
+
+	if docs == nil {
+		return ""
+	}
+
+	// filter out markers
+	var outGroup ast.CommentGroup
+	outGroup.List = make([]*ast.Comment, 0, len(docs.List))
+	for _, comment := range docs.List {
+		if isMarkerComment(comment.Text) {
+			continue
+		}
+		outGroup.List = append(outGroup.List, comment)
+	}
+
+	// split lines, and re-join together as a single
+	// paragraph, respecting double-newlines as
+	// paragraph markers.
+	outLines := strings.Split(outGroup.Text(), "\n")
+	if outLines[len(outLines)-1] == "" {
+		// chop off the extraneous last part
+		outLines = outLines[:len(outLines)-1]
+	}
+	// respect double-newline meaning actual newline
+	for i, line := range outLines {
+		if line == "" {
+			outLines[i] = "\n"
+		}
+	}
+	return strings.Join(outLines, " ")
+}
+
+func isMarkerComment(comment string) bool {
+	if comment[0:2] != "//" {
+		return false
+	}
+	stripped := strings.TrimSpace(comment[2:])
+	if len(stripped) < 1 || stripped[0] != '+' {
+		return false
+	}
+	return true
+}
+
+type ConstInfo struct {
+	// Name is the name of the type.
+	Name string
+	// Doc is the Godoc of the type, pre-processed to remove markers and joine
+	// single newlines together.
+	Doc string
+
+	// Markers are all registered markers associated with the type.
+	Markers markers.MarkerValues
+
+	// RawDecl contains the raw GenDecl that the type was declared as part of.
+	RawDecl *ast.GenDecl
+	// RawSpec contains the raw Spec that declared this type.
+	RawSpec *ast.ValueSpec
+	// RawFile contains the file in which this type was declared.
+	RawFile *ast.File
+}
+
+func EachValue(col *markers.Collector, pkg *loader.Package, cb markers.TypeCallback) error {
+	// test
+	markersInpkg, err := col.MarkersInPackage(pkg)
+	if err != nil {
+		return err
+	}
+
+	eachValue(pkg, func(file *ast.File, decl *ast.GenDecl, spec *ast.ValueSpec) {
+		// var fields []markers.FieldInfo
+		//if _, isStruct := spec.Type.(*ast.StructType); isStruct {
+		//	log(fmt.Sprintf("in loader: is type? %v \n", decl.Tok == token.TYPE))
+		//}
+		if decl.Tok == token.CONST {
+			log(fmt.Sprintf("in loader: is constent!!!!!! %v \n", spec.Names))
+			cb(&markers.TypeInfo{
+				Name:    spec.Names[0].Name,
+				Markers: markersInpkg[spec],
+				Doc:     extractDoc(spec, decl),
+				RawDecl: decl,
+				RawFile: file,
+			})
+		}
+
+	})
+	return nil
+}
+
 // Generate generates the artifacts
 func (g Generator) Generate(ctx *genall.GenerationContext) error {
 	for _, root := range ctx.Roots {
@@ -79,6 +230,7 @@ func (g Generator) Generate(ctx *genall.GenerationContext) error {
 
 		var rootStructToOverride *markers.TypeInfo
 		packageTypes := map[string]*markers.TypeInfo{}
+
 		if err := markers.EachType(ctx.Collector, root, func(info *markers.TypeInfo) {
 			if info.Markers.Get(overridesTypeMarker.Name) != nil {
 				if rootStructToOverride == nil {
@@ -92,6 +244,25 @@ func (g Generator) Generate(ctx *genall.GenerationContext) error {
 				}
 			}
 			packageTypes[info.RawSpec.Name.Name] = info
+		}); err != nil {
+			root.AddError(err)
+			return nil
+		}
+
+		if err := EachValue(ctx.Collector, root, func(info *markers.TypeInfo) {
+			if info.Markers.Get(overridesTypeMarker.Name) != nil {
+				if rootStructToOverride == nil {
+					rootStructToOverride = info
+				} else {
+					root.AddError(fmt.Errorf("Marker %v should be added to only one Struct type, but was added on %v and %v",
+						overridesTypeMarker.Name,
+						rootStructToOverride.Name,
+						info.Name,
+					))
+				}
+			}
+			log(fmt.Sprintf("In EACHVALUE: %s \n", info.Name))
+			packageTypes[info.Name] = info
 		}); err != nil {
 			root.AddError(err)
 			return nil
@@ -186,7 +357,6 @@ type fieldChange struct {
 }
 
 func (g Generator) createOverride(newTypeToProcess typeToProcess, packageTypes map[string]*markers.TypeInfo) (ast.Decl, []typeToProcess, []error) {
-	log("createOverride!!!!!!  \n")
 	errors := []error{}
 	var alreadyFoundType *ast.TypeSpec = nil
 	fieldChanges := map[token.Pos]fieldChange{}

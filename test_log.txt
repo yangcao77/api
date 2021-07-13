@@ -1,171 +1,372 @@
-createOverride!!!!!!  
+in loader: is constent!!!!!! [ExecCommandType] 
+In EACHVALUE: ExecCommandType 
+in loader: is constent!!!!!! [ApplyCommandType] 
+In EACHVALUE: ApplyCommandType 
+in loader: is constent!!!!!! [CompositeCommandType] 
+In EACHVALUE: CompositeCommandType 
+in loader: is constent!!!!!! [CustomCommandType] 
+In EACHVALUE: CustomCommandType 
+in loader: is constent!!!!!! [BuildCommandGroupKind] 
+In EACHVALUE: BuildCommandGroupKind 
+in loader: is constent!!!!!! [RunCommandGroupKind] 
+In EACHVALUE: RunCommandGroupKind 
+in loader: is constent!!!!!! [TestCommandGroupKind] 
+In EACHVALUE: TestCommandGroupKind 
+in loader: is constent!!!!!! [DebugCommandGroupKind] 
+In EACHVALUE: DebugCommandGroupKind 
+in loader: is constent!!!!!! [UriK8sLikeComponentLocationType] 
+In EACHVALUE: UriK8sLikeComponentLocationType 
+in loader: is constent!!!!!! [InlinedK8sLikeComponentLocationType] 
+In EACHVALUE: InlinedK8sLikeComponentLocationType 
+in loader: is constent!!!!!! [ContainerComponentType] 
+In EACHVALUE: ContainerComponentType 
+in loader: is constent!!!!!! [KubernetesComponentType] 
+In EACHVALUE: KubernetesComponentType 
+in loader: is constent!!!!!! [OpenshiftComponentType] 
+In EACHVALUE: OpenshiftComponentType 
+in loader: is constent!!!!!! [PluginComponentType] 
+In EACHVALUE: PluginComponentType 
+in loader: is constent!!!!!! [VolumeComponentType] 
+In EACHVALUE: VolumeComponentType 
+in loader: is constent!!!!!! [CustomComponentType] 
+In EACHVALUE: CustomComponentType 
+in loader: is constent!!!!!! [DevWorkspaceStatusStarting] 
+In EACHVALUE: DevWorkspaceStatusStarting 
+in loader: is constent!!!!!! [DevWorkspaceStatusRunning] 
+In EACHVALUE: DevWorkspaceStatusRunning 
+in loader: is constent!!!!!! [DevWorkspaceStatusStopped] 
+In EACHVALUE: DevWorkspaceStatusStopped 
+in loader: is constent!!!!!! [DevWorkspaceStatusStopping] 
+In EACHVALUE: DevWorkspaceStatusStopping 
+in loader: is constent!!!!!! [DevWorkspaceStatusFailed] 
+In EACHVALUE: DevWorkspaceStatusFailed 
+in loader: is constent!!!!!! [DevWorkspaceStatusError] 
+In EACHVALUE: DevWorkspaceStatusError 
+in loader: is constent!!!!!! [DevWorkspaceComponentsReady] 
+In EACHVALUE: DevWorkspaceComponentsReady 
+in loader: is constent!!!!!! [DevWorkspaceRoutingReady] 
+In EACHVALUE: DevWorkspaceRoutingReady 
+in loader: is constent!!!!!! [DevWorkspaceServiceAccountReady] 
+In EACHVALUE: DevWorkspaceServiceAccountReady 
+in loader: is constent!!!!!! [DevWorkspaceReady] 
+In EACHVALUE: DevWorkspaceReady 
+in loader: is constent!!!!!! [DevWorkspaceFailedStart] 
+In EACHVALUE: DevWorkspaceFailedStart 
+in loader: is constent!!!!!! [DevWorkspaceError] 
+In EACHVALUE: DevWorkspaceError 
+in loader: is constent!!!!!! [HTTPEndpointProtocol] 
+In EACHVALUE: HTTPEndpointProtocol 
+in loader: is constent!!!!!! [HTTPSEndpointProtocol] 
+In EACHVALUE: HTTPSEndpointProtocol 
+in loader: is constent!!!!!! [WSEndpointProtocol] 
+In EACHVALUE: WSEndpointProtocol 
+in loader: is constent!!!!!! [WSSEndpointProtocol] 
+In EACHVALUE: WSSEndpointProtocol 
+in loader: is constent!!!!!! [TCPEndpointProtocol] 
+In EACHVALUE: TCPEndpointProtocol 
+in loader: is constent!!!!!! [UDPEndpointProtocol] 
+In EACHVALUE: UDPEndpointProtocol 
+in loader: is constent!!!!!! [PublicEndpointExposure] 
+In EACHVALUE: PublicEndpointExposure 
+in loader: is constent!!!!!! [InternalEndpointExposure] 
+In EACHVALUE: InternalEndpointExposure 
+in loader: is constent!!!!!! [NoneEndpointExposure] 
+In EACHVALUE: NoneEndpointExposure 
+in loader: is constent!!!!!! [UriImportReferenceType] 
+In EACHVALUE: UriImportReferenceType 
+in loader: is constent!!!!!! [IdImportReferenceType] 
+In EACHVALUE: IdImportReferenceType 
+in loader: is constent!!!!!! [KubernetesImportReferenceType] 
+In EACHVALUE: KubernetesImportReferenceType 
+in loader: is constent!!!!!! [ReplaceOverridingDirective] 
+In EACHVALUE: ReplaceOverridingDirective 
+in loader: is constent!!!!!! [DeleteOverridingDirective] 
+In EACHVALUE: DeleteOverridingDirective 
+in loader: is constent!!!!!! [DeleteFromPrimitiveListOverridingPatchDirective] 
+In EACHVALUE: DeleteFromPrimitiveListOverridingPatchDirective 
+in loader: is constent!!!!!! [GitProjectSourceType] 
+In EACHVALUE: GitProjectSourceType 
+in loader: is constent!!!!!! [ZipProjectSourceType] 
+In EACHVALUE: ZipProjectSourceType 
+in loader: is constent!!!!!! [CustomProjectSourceType] 
+In EACHVALUE: CustomProjectSourceType 
 Name: DevWorkspaceTemplateSpecContent
-createOverride!!!!!!  
 Name: Component
-createOverride!!!!!!  
 Name: Project
-createOverride!!!!!!  
 Name: StarterProject
-createOverride!!!!!!  
 Name: Command
-createOverride!!!!!!  
 Name: ComponentUnion
-createOverride!!!!!!  
 Name: ProjectSource
 skipped nextOne: ProjectSourceParentOverride 
-createOverride!!!!!!  
 Name: CommandUnion
-createOverride!!!!!!  
 Name: ComponentType
-createOverride!!!!!!  
 Name: ContainerComponent
-createOverride!!!!!!  
 Name: KubernetesComponent
-createOverride!!!!!!  
 Name: OpenshiftComponent
-createOverride!!!!!!  
 Name: VolumeComponent
-createOverride!!!!!!  
 Name: PluginComponent
-createOverride!!!!!!  
 Name: ProjectSourceType
-createOverride!!!!!!  
 Name: GitProjectSource
-createOverride!!!!!!  
 Name: ZipProjectSource
-createOverride!!!!!!  
 Name: CommandType
-createOverride!!!!!!  
 Name: ExecCommand
-createOverride!!!!!!  
 Name: ApplyCommand
-createOverride!!!!!!  
 Name: CompositeCommand
-createOverride!!!!!!  
 Name: BaseComponent
-createOverride!!!!!!  
 Name: Container
-createOverride!!!!!!  
 Name: Endpoint
-createOverride!!!!!!  
 Name: K8sLikeComponent
 skipped nextOne: K8sLikeComponentParentOverride 
 skipped nextOne: BaseComponentParentOverride 
-createOverride!!!!!!  
 Name: Volume
 skipped nextOne: BaseComponentParentOverride 
-createOverride!!!!!!  
 Name: ImportReference
-createOverride!!!!!!  
 Name: PluginOverrides
-createOverride!!!!!!  
 Name: GitLikeProjectSource
-createOverride!!!!!!  
 Name: CommonProjectSource
-createOverride!!!!!!  
 Name: LabeledCommand
-createOverride!!!!!!  
 Name: EnvVar
 skipped nextOne: LabeledCommandParentOverride 
 skipped nextOne: LabeledCommandParentOverride 
-createOverride!!!!!!  
 Name: EnvVar
-createOverride!!!!!!  
 Name: VolumeMount
-createOverride!!!!!!  
 Name: EndpointExposure
-createOverride!!!!!!  
 Name: EndpointProtocol
 skipped nextOne: BaseComponentParentOverride 
-createOverride!!!!!!  
 Name: K8sLikeComponentLocation
-createOverride!!!!!!  
 Name: Endpoint
-createOverride!!!!!!  
 Name: ImportReferenceUnion
-createOverride!!!!!!  
 Name: OverridesBase
-createOverride!!!!!!  
 Name: ComponentPluginOverride
-createOverride!!!!!!  
 Name: CommandPluginOverride
 skipped nextOne: CommonProjectSourceParentOverride 
-createOverride!!!!!!  
 Name: CheckoutFrom
-createOverride!!!!!!  
 Name: BaseCommand
-createOverride!!!!!!  
 Name: K8sLikeComponentLocationType
 skipped nextOne: EndpointExposureParentOverride 
 skipped nextOne: EndpointProtocolParentOverride 
-createOverride!!!!!!  
 Name: ImportReferenceType
-createOverride!!!!!!  
 Name: KubernetesCustomResourceImportReference
-createOverride!!!!!!  
 Name: ComponentUnionPluginOverride
-createOverride!!!!!!  
 Name: CommandUnionPluginOverride
-createOverride!!!!!!  
 Name: CommandGroup
-createOverride!!!!!!  
 Name: ComponentTypePluginOverride
-createOverride!!!!!!  
 Name: ContainerComponentPluginOverride
-createOverride!!!!!!  
 Name: KubernetesComponentPluginOverride
-createOverride!!!!!!  
 Name: OpenshiftComponentPluginOverride
-createOverride!!!!!!  
 Name: VolumeComponentPluginOverride
-createOverride!!!!!!  
 Name: CommandTypePluginOverride
-createOverride!!!!!!  
 Name: ExecCommandPluginOverride
-createOverride!!!!!!  
 Name: ApplyCommandPluginOverride
-createOverride!!!!!!  
 Name: CompositeCommandPluginOverride
-createOverride!!!!!!  
 Name: CommandGroupKind
-createOverride!!!!!!  
 Name: BaseComponentPluginOverride
-createOverride!!!!!!  
 Name: ContainerPluginOverride
-createOverride!!!!!!  
 Name: EndpointPluginOverride
-createOverride!!!!!!  
 Name: K8sLikeComponentPluginOverride
 skipped nextOne: K8sLikeComponentPluginOverrideParentOverride 
 skipped nextOne: BaseComponentPluginOverrideParentOverride 
-createOverride!!!!!!  
 Name: VolumePluginOverride
-createOverride!!!!!!  
 Name: LabeledCommandPluginOverride
-createOverride!!!!!!  
 Name: EnvVarPluginOverride
 skipped nextOne: LabeledCommandPluginOverrideParentOverride 
 skipped nextOne: LabeledCommandPluginOverrideParentOverride 
-createOverride!!!!!!  
 Name: EnvVarPluginOverride
-createOverride!!!!!!  
 Name: VolumeMountPluginOverride
-createOverride!!!!!!  
 Name: EndpointExposurePluginOverride
-createOverride!!!!!!  
 Name: EndpointProtocolPluginOverride
 skipped nextOne: BaseComponentPluginOverrideParentOverride 
-createOverride!!!!!!  
 Name: K8sLikeComponentLocationPluginOverride
-createOverride!!!!!!  
 Name: EndpointPluginOverride
-createOverride!!!!!!  
 Name: BaseCommandPluginOverride
-createOverride!!!!!!  
 Name: K8sLikeComponentLocationTypePluginOverride
 skipped nextOne: EndpointExposurePluginOverrideParentOverride 
 skipped nextOne: EndpointProtocolPluginOverrideParentOverride 
-createOverride!!!!!!  
 Name: CommandGroupPluginOverride
-createOverride!!!!!!  
+Name: CommandGroupKindPluginOverride
+in loader: is constent!!!!!! [ExecCommandType] 
+In EACHVALUE: ExecCommandType 
+in loader: is constent!!!!!! [ApplyCommandType] 
+In EACHVALUE: ApplyCommandType 
+in loader: is constent!!!!!! [CompositeCommandType] 
+In EACHVALUE: CompositeCommandType 
+in loader: is constent!!!!!! [CustomCommandType] 
+In EACHVALUE: CustomCommandType 
+in loader: is constent!!!!!! [BuildCommandGroupKind] 
+In EACHVALUE: BuildCommandGroupKind 
+in loader: is constent!!!!!! [RunCommandGroupKind] 
+In EACHVALUE: RunCommandGroupKind 
+in loader: is constent!!!!!! [TestCommandGroupKind] 
+In EACHVALUE: TestCommandGroupKind 
+in loader: is constent!!!!!! [DebugCommandGroupKind] 
+In EACHVALUE: DebugCommandGroupKind 
+in loader: is constent!!!!!! [UriK8sLikeComponentLocationType] 
+In EACHVALUE: UriK8sLikeComponentLocationType 
+in loader: is constent!!!!!! [InlinedK8sLikeComponentLocationType] 
+In EACHVALUE: InlinedK8sLikeComponentLocationType 
+in loader: is constent!!!!!! [ContainerComponentType] 
+In EACHVALUE: ContainerComponentType 
+in loader: is constent!!!!!! [KubernetesComponentType] 
+In EACHVALUE: KubernetesComponentType 
+in loader: is constent!!!!!! [OpenshiftComponentType] 
+In EACHVALUE: OpenshiftComponentType 
+in loader: is constent!!!!!! [PluginComponentType] 
+In EACHVALUE: PluginComponentType 
+in loader: is constent!!!!!! [VolumeComponentType] 
+In EACHVALUE: VolumeComponentType 
+in loader: is constent!!!!!! [CustomComponentType] 
+In EACHVALUE: CustomComponentType 
+in loader: is constent!!!!!! [DevWorkspaceStatusStarting] 
+In EACHVALUE: DevWorkspaceStatusStarting 
+in loader: is constent!!!!!! [DevWorkspaceStatusRunning] 
+In EACHVALUE: DevWorkspaceStatusRunning 
+in loader: is constent!!!!!! [DevWorkspaceStatusStopped] 
+In EACHVALUE: DevWorkspaceStatusStopped 
+in loader: is constent!!!!!! [DevWorkspaceStatusStopping] 
+In EACHVALUE: DevWorkspaceStatusStopping 
+in loader: is constent!!!!!! [DevWorkspaceStatusFailed] 
+In EACHVALUE: DevWorkspaceStatusFailed 
+in loader: is constent!!!!!! [DevWorkspaceStatusError] 
+In EACHVALUE: DevWorkspaceStatusError 
+in loader: is constent!!!!!! [DevWorkspaceComponentsReady] 
+In EACHVALUE: DevWorkspaceComponentsReady 
+in loader: is constent!!!!!! [DevWorkspaceRoutingReady] 
+In EACHVALUE: DevWorkspaceRoutingReady 
+in loader: is constent!!!!!! [DevWorkspaceServiceAccountReady] 
+In EACHVALUE: DevWorkspaceServiceAccountReady 
+in loader: is constent!!!!!! [DevWorkspaceReady] 
+In EACHVALUE: DevWorkspaceReady 
+in loader: is constent!!!!!! [DevWorkspaceFailedStart] 
+In EACHVALUE: DevWorkspaceFailedStart 
+in loader: is constent!!!!!! [DevWorkspaceError] 
+In EACHVALUE: DevWorkspaceError 
+in loader: is constent!!!!!! [HTTPEndpointProtocol] 
+In EACHVALUE: HTTPEndpointProtocol 
+in loader: is constent!!!!!! [HTTPSEndpointProtocol] 
+In EACHVALUE: HTTPSEndpointProtocol 
+in loader: is constent!!!!!! [WSEndpointProtocol] 
+In EACHVALUE: WSEndpointProtocol 
+in loader: is constent!!!!!! [WSSEndpointProtocol] 
+In EACHVALUE: WSSEndpointProtocol 
+in loader: is constent!!!!!! [TCPEndpointProtocol] 
+In EACHVALUE: TCPEndpointProtocol 
+in loader: is constent!!!!!! [UDPEndpointProtocol] 
+In EACHVALUE: UDPEndpointProtocol 
+in loader: is constent!!!!!! [PublicEndpointExposure] 
+In EACHVALUE: PublicEndpointExposure 
+in loader: is constent!!!!!! [InternalEndpointExposure] 
+In EACHVALUE: InternalEndpointExposure 
+in loader: is constent!!!!!! [NoneEndpointExposure] 
+In EACHVALUE: NoneEndpointExposure 
+in loader: is constent!!!!!! [UriImportReferenceType] 
+In EACHVALUE: UriImportReferenceType 
+in loader: is constent!!!!!! [IdImportReferenceType] 
+In EACHVALUE: IdImportReferenceType 
+in loader: is constent!!!!!! [KubernetesImportReferenceType] 
+In EACHVALUE: KubernetesImportReferenceType 
+in loader: is constent!!!!!! [ReplaceOverridingDirective] 
+In EACHVALUE: ReplaceOverridingDirective 
+in loader: is constent!!!!!! [DeleteOverridingDirective] 
+In EACHVALUE: DeleteOverridingDirective 
+in loader: is constent!!!!!! [DeleteFromPrimitiveListOverridingPatchDirective] 
+In EACHVALUE: DeleteFromPrimitiveListOverridingPatchDirective 
+in loader: is constent!!!!!! [GitProjectSourceType] 
+In EACHVALUE: GitProjectSourceType 
+in loader: is constent!!!!!! [ZipProjectSourceType] 
+In EACHVALUE: ZipProjectSourceType 
+in loader: is constent!!!!!! [CustomProjectSourceType] 
+In EACHVALUE: CustomProjectSourceType 
+Name: DevWorkspaceTemplateSpecContent
+Name: Component
+Name: Project
+Name: StarterProject
+Name: Command
+Name: ComponentUnion
+Name: ProjectSource
+skipped nextOne: ProjectSourceParentOverride 
+Name: CommandUnion
+Name: ComponentType
+Name: ContainerComponent
+Name: KubernetesComponent
+Name: OpenshiftComponent
+Name: VolumeComponent
+Name: PluginComponent
+Name: ProjectSourceType
+Name: GitProjectSource
+Name: ZipProjectSource
+Name: CommandType
+Name: ExecCommand
+Name: ApplyCommand
+Name: CompositeCommand
+Name: BaseComponent
+Name: Container
+Name: Endpoint
+Name: K8sLikeComponent
+skipped nextOne: K8sLikeComponentParentOverride 
+skipped nextOne: BaseComponentParentOverride 
+Name: Volume
+skipped nextOne: BaseComponentParentOverride 
+Name: ImportReference
+Name: PluginOverrides
+Name: GitLikeProjectSource
+Name: CommonProjectSource
+Name: LabeledCommand
+Name: EnvVar
+skipped nextOne: LabeledCommandParentOverride 
+skipped nextOne: LabeledCommandParentOverride 
+Name: EnvVar
+Name: VolumeMount
+Name: EndpointExposure
+Name: EndpointProtocol
+skipped nextOne: BaseComponentParentOverride 
+Name: K8sLikeComponentLocation
+Name: Endpoint
+Name: ImportReferenceUnion
+Name: OverridesBase
+Name: ComponentPluginOverride
+Name: CommandPluginOverride
+skipped nextOne: CommonProjectSourceParentOverride 
+Name: CheckoutFrom
+Name: BaseCommand
+Name: K8sLikeComponentLocationType
+skipped nextOne: EndpointExposureParentOverride 
+skipped nextOne: EndpointProtocolParentOverride 
+Name: ImportReferenceType
+Name: KubernetesCustomResourceImportReference
+Name: ComponentUnionPluginOverride
+Name: CommandUnionPluginOverride
+Name: CommandGroup
+Name: ComponentTypePluginOverride
+Name: ContainerComponentPluginOverride
+Name: KubernetesComponentPluginOverride
+Name: OpenshiftComponentPluginOverride
+Name: VolumeComponentPluginOverride
+Name: CommandTypePluginOverride
+Name: ExecCommandPluginOverride
+Name: ApplyCommandPluginOverride
+Name: CompositeCommandPluginOverride
+Name: CommandGroupKind
+Name: BaseComponentPluginOverride
+Name: ContainerPluginOverride
+Name: EndpointPluginOverride
+Name: K8sLikeComponentPluginOverride
+skipped nextOne: K8sLikeComponentPluginOverrideParentOverride 
+skipped nextOne: BaseComponentPluginOverrideParentOverride 
+Name: VolumePluginOverride
+Name: LabeledCommandPluginOverride
+Name: EnvVarPluginOverride
+skipped nextOne: LabeledCommandPluginOverrideParentOverride 
+skipped nextOne: LabeledCommandPluginOverrideParentOverride 
+Name: EnvVarPluginOverride
+Name: VolumeMountPluginOverride
+Name: EndpointExposurePluginOverride
+Name: EndpointProtocolPluginOverride
+skipped nextOne: BaseComponentPluginOverrideParentOverride 
+Name: K8sLikeComponentLocationPluginOverride
+Name: EndpointPluginOverride
+Name: BaseCommandPluginOverride
+Name: K8sLikeComponentLocationTypePluginOverride
+skipped nextOne: EndpointExposurePluginOverrideParentOverride 
+skipped nextOne: EndpointProtocolPluginOverrideParentOverride 
+Name: CommandGroupPluginOverride
 Name: CommandGroupKindPluginOverride

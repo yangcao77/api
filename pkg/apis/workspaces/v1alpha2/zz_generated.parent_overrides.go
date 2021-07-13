@@ -571,6 +571,7 @@ type VolumeMountParentOverride struct {
 // EndpointExposure describes the way an endpoint is exposed on the network.
 // Only one of the following exposures may be specified: public, internal, none.
 // +kubebuilder:validation:Enum=public;internal;none
+// +devfile:overrides:include:omit=true
 type EndpointExposureParentOverride string
 
 // EndpointProtocol defines the application and transport protocols of the traffic that will go through this endpoint.
